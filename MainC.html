@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>My patterns Canvas</title>
+    <style>
+        * {
+            text-align: center;
+            font-family: Assistant;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        #container {
+            width: 98vw;
+            height: 95vh;
+            margin: auto;
+        }
+
+        #MyCanvas {
+            border-radius: 15px;
+            background-color: white;
+            width: 100%;
+            height: 90%;
+            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        }
+
+        #Ui {
+            margin: auto;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            width: 80%;
+            height: 10%;
+            background-color: #626262;
+            padding: 2%;
+        }
+
+            #Ui input {
+                text-align: center;
+                width: 5%;
+                border-radius: 30%;
+            }
+
+            #Ui label {
+                margin-left: 5%;
+            }
+
+        #DrawBtn {
+            margin-left: 2%;
+            margin-top: 1%;
+            border-radius: 15px;
+            font-size: 14px;
+            background-image: linear-gradient(to bottom, #73ea60, #40b92c,#1f6b12);
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        }
+
+            #DrawBtn:hover {
+                cursor: pointer;
+                margin-left: 2%;
+                margin-top: 1%;
+                border-radius: 15px;
+                font-size: 16px;
+                background-image: linear-gradient(to bottom, #b8ffad, #40b92c,#9efb8e);
+                box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            }
+
+        .checkboxs {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+        }
+
+        #Ui input:checked {
+            accent-color: #49d44d;
+        }
+
+        #InfoBtn {
+            margin-left: 2%;
+            margin-top: 1%;
+            border-radius: 15px;
+            font-size: 14px;
+            background-image: linear-gradient(to bottom, #3b8d9f, #2c747b,#0e2880);
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        }
+
+            #InfoBtn:hover {
+                cursor: pointer;
+                margin-left: 2%;
+                margin-top: 1%;
+                border-radius: 15px;
+                font-size: 16px;
+                background-image: linear-gradient(to bottom, #0e2880, white,#43b7d1);
+                box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            }
+
+        #InfoModal {
+            font-size:16px;
+            position: absolute;
+            display: none;
+            border-radius: 15%;
+            color: white;
+            width: 65vw;
+            height: 65vh;
+            top: 10vh;
+            left: 20vw;
+            background-image: linear-gradient(to bottom, black, #1a1a1a,black);
+           
+        }
+        #credit p {
+            text-decoration:underline;
+            position:absolute;
+            left:5px;
+            color:wheat;
+        }
+    </style>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="MainC.js"></script>
+</head>
+<body onload="OnInit()">
+    <div id="container">
+        <div id="credit">
+            <p>&#169; Created by <br />Gilad Meirson</p>
+        </div>
+        <div id="Ui">
+            <label for="density">Density:</label>
+            <input id="density" type="number" name="density" value="0.734" step="0.01" />
+            <label for="radius">Radius:</label>
+            <input id="radius" type="number" name="radius" value="20" step="1" min="1" max="30" />
+
+            <label for="lineW">Line Width :</label>
+            <input id="lineW" type="number" name="lineW" value="2" max="9" min="1" />
+
+            <label for="LineC">Line Color :</label>
+            <input id="LineC" type="color" name="LineC" value="#000000" />
+
+            <label for="FillC">Fill Color :</label>
+            <input id="FillC" type="color" name="FillC" value="#ff00ff" />
+            <br /><br />
+            <label for="destOver">Source on Front? :</label>
+            <input class="checkboxs" id="destOver" type="checkbox" name="destOver" value="" />
+            <label for="Colrful">Colourful :</label>
+            <input class="checkboxs" id="Colrful" type="checkbox" name="Colrful" value="" />
+            <label for="Sizable">Get Bigger :</label>
+            <input class="checkboxs" id="Sizable" type="checkbox" name="Sizable" value="" />
+
+
+            <button onclick="main()" id="DrawBtn">Draw Patterns</button>
+            <button onclick="ShowInfoModal()" id="InfoBtn">Info(?)</button>
+        </div>
+        <canvas id="MyCanvas">
+
+        </canvas>
+        <div onclick="CloseInfoModal()" id="InfoModal">
+            <h3>The parameters:</h3>
+            <p>
+                <span style="background-color:red">Density :</span> It is the number that affects the shape of the pattern<br />(density and the distance between the circles)<br />
+                Calculated as follows:<br />
+                angle = Z * density <br />
+                dis = scale * Math.sqrt(Z)<br />
+                X = dis * Math.sin(angle) + WidthScreen / 2<br />
+                Y = dis * Math.cos(angle) + HightScreen / 2<br />
+                the X and Y variables are the new point for new circle.<br /><br />
+                <span style="background-color:red">Radius :</span> just affect on the radius size.<br /><br />
+                <span style="background-color:red">Line-Width :</span> just affect on the outline (border) size.<br /><br />
+                <span style="background-color:red">Source on front :</span> mean the first circle will be always above other circles (the last one will be behind everyone).<br /><br />
+                <span style="background-color:red">Colourful :</span> automaticly fill rainbow colors in the circle.<br /><br />
+                <span style="background-color:red">Get Bigger :</span> each time circle has been draw it will be little more bigger (radius will be larger).<br /><br />
+
+
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
